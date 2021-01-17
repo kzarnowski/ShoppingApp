@@ -10,8 +10,8 @@
 class IOManager {
     //manage console input-output
 public:
-    static int readInt(std::string message);
-    static std::string readString(std::string message);
+    static int readInt(const std::string & message);
+    static std::string readString(const std::string &  message);
 };
 
 #endif //SHOPPINGAPP_IOMANAGER_H

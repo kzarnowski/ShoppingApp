@@ -3,9 +3,10 @@
 //
 
 #include <iostream>
+#include <utility>
 #include "Product.h"
 
-Product::Product(const std::string & name, int quantity) : _name(name), _quantity(quantity) {}
+Product::Product(std::string  name, int quantity) : _name(std::move(name)), _quantity(quantity) {}
 
 std::ostream &operator<<(std::ostream &os, const Product &p) {
     os << p._name << " : " << p.quantityToString() << std::endl;

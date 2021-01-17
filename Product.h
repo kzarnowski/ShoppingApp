@@ -13,7 +13,7 @@ protected:
     int _quantity;
 
 public:
-    explicit Product(const std::string & name = "New product", int quantity = 1);
+    explicit Product(std::string  name = "New product", int quantity = 1);
     std::string getName() const { return this->_name;};
     int getQuantity() const { return _quantity; };
     void addQuantity(int q);

@@ -2,7 +2,6 @@
 #include "App.h"
 #include <fstream>
 
-
 int main(int argc, char** argv) {
     std::ifstream input;
     if (argc > 1) {

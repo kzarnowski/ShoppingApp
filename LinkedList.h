@@ -70,6 +70,39 @@ void LinkedList<T>::add(T item) {
     _size++;
 }
 
+//template<class T>
+//void LinkedList<T>::remove(int index) {
+//    if (index >= _size || index < 0) {
+//        return; // THROW EXCEPTION
+//    } else if (index == 0 && _size == 1) {
+//        // remove the only one
+//        delete _head->data;
+//        _head = nullptr;
+//        _end = nullptr;
+//        _size = 0;
+//    } else if (index == 0) {
+//        // remove first
+//        delete _head->data;
+//        _head->next->prev = nullptr;
+//        _head = _head->next;
+//        _size--;
+//    } else if (index == _size - 1) {
+//        // remove last
+//        delete _end->data;
+//        _end->prev->next = nullptr;
+//        _end = _end->prev;
+//        _size--;
+//    } else {
+//        // remove from inside
+//        Node<T>* r = getNode(index);
+//        delete r->data;
+//        r->prev->next = r->next;
+//        r->next->prev = r->prev;
+//        _size--;
+//    }
+//
+//}
+
 template<class T>
 void LinkedList<T>::remove(int index) {
     if (index >= _size || index < 0) {
@@ -103,6 +136,8 @@ void LinkedList<T>::remove(int index) {
 
 }
 
+
+
 template<class T>
 Node<T> *LinkedList<T>::getNode(int index) const {
     if (index >= _size || index < 0) {
@@ -110,8 +145,10 @@ Node<T> *LinkedList<T>::getNode(int index) const {
     }
 
     Node<T>* p = _head;
-    for(int i=0; i<index; i++) {
-        p = _head->next;
+    int i = 0;
+    while(p != nullptr && i < index){
+        p = p->next;
+        i++;
     }
     return p;
 }
@@ -122,22 +159,6 @@ LinkedList<T>::~LinkedList() {
         remove(0);
     }
 }
-
-//template<class T>
-//std::string LinkedList<T>::toString() const {
-//    std::string res;
-//    if (this->empty()) {
-//        res = "Empty list\n";
-//    } else {
-//        Node<T>* p = _head;
-//        while (p) {
-//            res += p->data;
-//            res += '\n';
-//            p = p->next;
-//        }
-//    }
-//    return res;
-//}
 
 template<class T>
 std::ostream& operator<< (std::ostream& os, const LinkedList<T>& l) {

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <utility>
 #include "IOManager.h"
+#include "Exceptions.h"
 
 ShoppingList::ShoppingList(std::string  name) : _name(std::move(name)) {}
 
@@ -27,8 +28,7 @@ bool ShoppingList::isFull() const {
 
 void ShoppingList::addProduct() {
     if (this->isFull()) {
-        std::cout << "This list is full." << std::endl;
-        return;
+        throw ShoppingListOverflow();
     }
     std::string name = IOManager::readString("Product name");
     int unit = IOManager::readInt("Set unit: 1.pieces  2.grams  3.milliliters");
@@ -48,7 +48,7 @@ void ShoppingList::addProduct() {
             p = new ProductByCapacity(name, quantity);
             break;
         default:
-            std::cout << "No such unit";
+            throw ActionOutOfRange("Wrong unit selected.");
     }
     this->_items.push_back(p);
 }
@@ -59,13 +59,11 @@ void ShoppingList::addProduct(Product* p) {
 
 void ShoppingList::removeProduct() {
     if (this->getSize() == 0) {
-        std::cout << "Nothing to delete." << std::endl;
-        return;
+        throw ProductOutOfRange("List is empty. No product to delete.");
     }
     int index = IOManager::readInt("Item index");
     if (index > this->getSize()) {
-        std::cout << "No such product.";
-        return;
+        throw ProductOutOfRange();
     }
     this->_items.erase(_items.begin()+index-1);
 }

@@ -22,13 +22,13 @@ public:
     void openList();
     void display();
     bool isRunning() const { return _running;};
+    static void moveProduct(ShoppingList *from, ShoppingList* dest, int index);
 private:
     void manageAction();
     void terminate() { _running = false;};
     void copyList(ShoppingList* sl);
     void mergeLists();
     void moveProduct(ShoppingList *from);
-    bool moveProduct(ShoppingList *from, ShoppingList* dest, int index);
 };
 
 #endif //SHOPPINGAPP_APP_H
